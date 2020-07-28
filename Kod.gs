@@ -1,6 +1,6 @@
-const FOLDER_ID = "13IOecyfRgwkdphJr7lChQrDT2IeiErah";
-const SS = "13_euBdyshOplyxobP_v1geVwWg9GMfqO7ddYdmC-NoI";
-const SHEET = "Arkusz1";
+const FOLDER_ID = "";
+const SS = "";
+const SHEET = "";
 
 function extractStudentIDsAndSectionToSheets(){
   const ss = SpreadsheetApp.getActiveSpreadsheet()
