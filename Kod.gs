@@ -1,19 +1,19 @@
-const FOLDER_ID = "";
-const SS = "";
-const SHEET = "";
+const FOLDER_ID = "13IOecyfRgwkdphJr7lChQrDT2IeiErah";
+const SS = "13_euBdyshOplyxobP_v1geVwWg9GMfqO7ddYdmC-NoI";
+const SHEET = "Arkusz1";
 
 function extractStudentIDsAndSectionToSheets(){
   const ss = SpreadsheetApp.getActiveSpreadsheet()
   const folder = DriveApp.getFolderById(FOLDER_ID);
   const files = folder.getFilesByType("application/pdf");
-  
-  let allIDsAndCRNs = []
+  while(files.hasNext()){
   let fileID = files.next().getId();
-  Logger.log(fileID);
-  
   const doc = getTextFromPDF(fileID);
   const studentIDs = extractStudentIDs(doc.text.toString()); 
   importToSpreadsheet(studentIDs);
+  Drive.Files.remove(fileID);
+  
+  }
 };
 
 function getTextFromPDF(fileID) {
@@ -61,7 +61,6 @@ function extractStudentIDs(text){
 function importToSpreadsheet(code){
   const sheet = SpreadsheetApp.openById(SS).getSheetByName(SHEET);
   for(let x = 0; x <= code.code.length-1; x++){
-    Logger.log(code.code[x]);
     sheet.appendRow([code.code[x][0],code.company[x]]);
   }
 }
